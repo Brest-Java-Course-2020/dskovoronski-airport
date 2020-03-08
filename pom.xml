@@ -47,7 +47,6 @@
                 <groupId>com.myproject</groupId>
                 <artifactId>airport-test</artifactId>
                 <version>${project.version}</version>
-                <scope>test</scope>
             </dependency>
 
             <dependency>
@@ -97,6 +96,11 @@
                 <artifactId>javax.servlet-api</artifactId>
                 <version>4.0.0</version>
                 <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>javax.validation</groupId>
+                <artifactId>validation-api</artifactId>
+                <version>${validation-api.version}</version>
             </dependency>
 
             <dependency>
@@ -200,6 +204,7 @@
     <build>
         <pluginManagement>
             <plugins>
+
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
@@ -225,6 +230,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-failsafe-plugin</artifactId>
+                    <version>3.0.0-M4</version>
                     <executions>
                         <execution>
                             <goals>
@@ -237,9 +243,9 @@
                         <argLine>
                             --illegal-access=permit
                         </argLine>
-                        <includes>
-                            <include>**/*IT*</include>
-                        </includes>
+                      <includes>
+                          <include>**/*IT*</include>
+                      </includes>
                     </configuration>
                 </plugin>
             </plugins>

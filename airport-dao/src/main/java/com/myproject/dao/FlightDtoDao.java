@@ -1,5 +1,7 @@
 package com.myproject.dao;
 
+import com.myproject.model.dto.FlightDto;
+
 import java.util.List;
 
 public interface FlightDtoDao {
@@ -8,6 +10,6 @@ public interface FlightDtoDao {
          *
          * @return Flights list.
          */
-        List <FlightDtoDao> findAllWithQuantityPassengers();
+        List <FlightDto> findAllWithQuantityPassengers();
 
 }

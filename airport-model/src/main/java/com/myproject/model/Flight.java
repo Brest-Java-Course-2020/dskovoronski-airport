@@ -16,12 +16,12 @@ public class Flight {
     /**
      * Constructor with Flight id, name of route flight and date.
      * @param flightId Flight id.
-     * @param flight name of route flight.
+     * @param direction name of direction flight.
      * @param date Date of flight.
      */
-    public Flight(Integer flightId, String flight, Date date) {
+    public Flight(Integer flightId, String direction, Date date) {
         this.flightId = flightId;
-        this.flight = flight;
+        this.direction = direction;
         this.date = date;
     }
 
@@ -33,7 +33,7 @@ public class Flight {
     /**
      * Name of flight direction .
      */
-    private String flight;
+    private String direction;
 
     /**
      * Date of flight.
@@ -57,19 +57,19 @@ public class Flight {
     }
 
     /**
-     * Return name of route flight.
-     * @return flight .
+     * Return name of direction flight.
+     * @return direction .
      */
-    public String getFlight() {
-        return flight;
+    public String getDirection() {
+        return direction;
     }
 
     /**
      * Set name of route flight.
-     * @param flight name of route flight.
+     * @param direction name of direction flight.
      */
-    public void setFlight(String flight) {
-        this.flight = flight;
+    public void setDirection(String direction) {
+        this.direction = direction;
     }
 
     /**
