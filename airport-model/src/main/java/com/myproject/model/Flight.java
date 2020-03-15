@@ -22,7 +22,7 @@ public class Flight {
     public Flight(Integer flightId, String direction, Date date) {
         this.flightId = flightId;
         this.direction = direction;
-        this.date = date;
+        this.date = date == null ? null : (Date) date.clone();
     }
 
     /**
@@ -77,7 +77,7 @@ public class Flight {
      * @return date Date of flight.
      */
     public Date getDate() {
-        return date;
+        return date == null ? null : (Date) date.clone();
     }
 
     /**
@@ -85,7 +85,7 @@ public class Flight {
      * @param date Date of flight.
      */
     public void setDate(Date date) {
-        this.date = date;
+        this.date = date == null ? null : (Date) date.clone();
     }
 
 }

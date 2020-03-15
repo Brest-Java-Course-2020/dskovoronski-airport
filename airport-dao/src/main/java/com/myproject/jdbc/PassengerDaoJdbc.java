@@ -1,7 +1,6 @@
 package com.myproject.jdbc;
 
 import com.myproject.dao.PassengerDao;
-import com.myproject.model.Flight;
 import com.myproject.model.Passenger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -93,7 +92,7 @@ public class PassengerDaoJdbc implements PassengerDao {
         mapSqlParameterSource.addValue(PASSENGER_ID, passengerId);
         return namedParameterJdbcTemplate.update(deleteSql, mapSqlParameterSource);
     }
-    private class PassengerRowMapper implements RowMapper<Passenger> {
+    private static class PassengerRowMapper implements RowMapper<Passenger> {
 
         @Override
         public Passenger mapRow(ResultSet resultSet, int i) throws SQLException {

@@ -78,7 +78,6 @@ public class FlightDaoJdbc implements FlightDao {
         Map<String, Object> params = new HashMap<>();
         params.put(FLIGHT_ID, flight.getFlightId());
         params.put(DIRECTION, flight.getDirection());
-        KeyHolder keyHolder = new GeneratedKeyHolder();
         return namedParameterJdbcTemplate.update(updateSql, params);
     }
 
@@ -90,7 +89,7 @@ public class FlightDaoJdbc implements FlightDao {
         return namedParameterJdbcTemplate.update(deleteSql, mapSqlParameterSource);
     }
 
-    private class FlightRowMapper implements RowMapper<Flight> {
+    private static class FlightRowMapper implements RowMapper<Flight> {
 
         @Override
         public Flight mapRow(ResultSet resultSet, int i) throws SQLException {

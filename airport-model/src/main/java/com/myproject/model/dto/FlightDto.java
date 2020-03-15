@@ -19,7 +19,7 @@ public class FlightDto {
     public FlightDto(Integer flightId, String flight, Date date) {
         this.flightId = flightId;
         this.flight = flight;
-        this.date = date;
+        this.date = date == null ? null : (Date) date.clone();
     }
 
     /**
@@ -79,7 +79,7 @@ public class FlightDto {
      * @return date
      */
     public Date getDate() {
-        return date;
+        return date == null ? null : (Date) date.clone();
     }
 
     /**
@@ -87,7 +87,7 @@ public class FlightDto {
      * @param date
      */
     public void setDate(Date date) {
-        this.date = date;
+        this.date = date == null ? null : (Date) date.clone();
     }
 
     /**
