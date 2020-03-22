@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -26,4 +27,11 @@ public class FlightDtoServiceImpl implements FlightDtoService {
         LOGGER.trace("findAllWithQuantityPassengers()");
         return flightDtoDao.findAllWithQuantityPassengers();
     }
+
+    @Override
+    public List<FlightDto> findAllWithQuantityPassengersAndDateFilter(Date dateFrom, Date dateTo) {
+        LOGGER.trace("findAllWithQuantityPassengersAndDateFilter()");
+        return flightDtoDao.findAllWithQuantityPassengersAndDateFilter(dateFrom,dateTo);
+    }
+
 }

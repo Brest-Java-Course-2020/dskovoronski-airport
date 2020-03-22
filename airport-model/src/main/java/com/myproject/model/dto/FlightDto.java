@@ -13,12 +13,12 @@ public class FlightDto {
     /**
      * Constructor with Flight number, name of route flight and date
      * @param flightId Flight number
-     * @param flight name of route flight
+     * @param direction name of route flight
      * @param date Date of flight
      */
-    public FlightDto(Integer flightId, String flight, Date date) {
+    public FlightDto(Integer flightId, String direction, Date date) {
         this.flightId = flightId;
-        this.flight = flight;
+        this.direction = direction;
         this.date = date == null ? null : (Date) date.clone();
     }
 
@@ -30,7 +30,7 @@ public class FlightDto {
     /**
      * Name of flight direction
      */
-    private String flight;
+    private String direction;
 
     /**
      * Date of flight
@@ -59,19 +59,19 @@ public class FlightDto {
     }
 
     /**
-     * Return name of route flight
-     * @return flight
+     * Return name of direction route flight
+     * @return direction
      */
-    public String getFlight() {
-        return flight;
+    public String getDirection() {
+        return direction;
     }
 
     /**
-     * Set name of route flight
-     * @param flight name of route flight
+     * Set name of direction route flight
+     * @param direction name of direction route flight
      */
-    public void setFlight(String flight) {
-        this.flight = flight;
+    public void setDirection(String direction) {
+        this.direction = direction;
     }
 
     /**
@@ -105,4 +105,5 @@ public class FlightDto {
     public void setQuantityPassengers(Integer quantityPassengers) {
         this.quantityPassengers = quantityPassengers;
     }
+
 }
