@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -32,7 +33,8 @@ public class FlightDtoDaoJdbcIT {
     @Test
     public void findAllWithQuantityPassengersAndDateFilter() {
         Date dateFrom = new Date();
-        Date dateTo = new Date(130,05,12);
+        long milliSeconds =  9999999999999L;
+        Date dateTo = new Date(milliSeconds);
         assertTrue(dateFrom.compareTo(dateTo)<0);
         List<FlightDto> flights = flightDtoDao.findAllWithQuantityPassengersAndDateFilter(dateFrom,dateTo);
         assertNotNull(flights);

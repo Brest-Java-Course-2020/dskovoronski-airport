@@ -1,6 +1,6 @@
-INSERT INTO flights  (flight_id ,direction, date_flight ) VALUES (101, 'Minsk-Berlin', '2020-04-11');
+INSERT INTO flights  (flight_id ,direction, date_flight ) VALUES (101, 'Minsk-Brest', '2020-04-11');
 INSERT INTO flights  (direction, date_flight  ) VALUES ('Minsk-Frankfurt', '2020-04-12');
-INSERT INTO flights  (direction, date_flight  ) VALUES ('Minsk-Moscow', '2020-04-10');
+INSERT INTO flights  (direction, date_flight  ) VALUES ('Minsk-Brest', '2020-04-10');
 INSERT INTO flights  (direction, date_flight  ) VALUES ('Minsk-Paris', '2020-04-15');
 INSERT INTO flights  (direction, date_flight  ) VALUES ('Minsk-Brest', '2020-04-09');
 

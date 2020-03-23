@@ -22,7 +22,7 @@ public class FlightDtoServiceImplIT {
     FlightDtoServiceImpl flightDtoService;
 
     @Test
-    public void shouldFindAllWithAvgSalary() {
+    public void shouldFindAllWithQuantityPassengers() {
         List<FlightDto> flights = flightDtoService.findAllWithQuantityPassengers();
         assertNotNull(flights);
         assertTrue(flights.size() > 0);
@@ -31,7 +31,8 @@ public class FlightDtoServiceImplIT {
     @Test
     public void findAllWithQuantityPassengersAndDateFilter() {
         Date dateFrom = new Date();
-        Date dateTo = new Date(130,05,12);
+        long milliSeconds = 9999999999999L;
+        Date dateTo = new Date(milliSeconds);
         assertTrue(dateFrom.compareTo(dateTo)<0);
         List<FlightDto> flights = flightDtoService.findAllWithQuantityPassengersAndDateFilter(dateFrom,dateTo);
         assertNotNull(flights);

@@ -1,6 +1,5 @@
 package com.myproject;
 
-import com.myproject.model.Flight;
 import com.myproject.model.dto.FlightDto;
 
 import java.util.Date;
