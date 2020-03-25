@@ -23,6 +23,7 @@ public class FlightDtoServiceImpl implements FlightDtoService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<FlightDto> findAllWithQuantityPassengers() {
         LOGGER.trace("findAllWithQuantityPassengers()");
         return flightDtoDao.findAllWithQuantityPassengers();

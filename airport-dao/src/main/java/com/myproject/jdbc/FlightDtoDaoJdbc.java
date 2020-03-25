@@ -13,7 +13,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import java.util.Date;
 import java.util.List;
 
-import static com.myproject.constansts.FlightConstants.*;
+import static com.myproject.constants.FlightConstants.*;
 
 public class FlightDtoDaoJdbc implements FlightDtoDao {
 

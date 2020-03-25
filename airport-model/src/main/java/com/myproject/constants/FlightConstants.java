@@ -1,4 +1,4 @@
-package com.myproject.constansts;
+package com.myproject.constants;
 
 public class FlightConstants {
     public static final String FLIGHT_ID = "flight_id";

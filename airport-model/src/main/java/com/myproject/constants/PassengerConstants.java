@@ -1,4 +1,4 @@
-package com.myproject.constansts;
+package com.myproject.constants;
 
 public class PassengerConstants {
     public static final String PASSENGER_ID = "passenger_id";

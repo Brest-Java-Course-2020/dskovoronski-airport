@@ -10,18 +10,29 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ *
+ */
 @Service
 @Transactional
 public class PassengerServiceImpl implements PassengerService {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(FlightServiceImpl.class);
-
+    /**
+     * LOGGER
+     */
+    private static final Logger LOGGER = LoggerFactory
+            .getLogger(FlightServiceImpl.class);
+    /**
+     * create passengerDao
+     */
     private final PassengerDao passengerDao;
 
+    /**
+     * initialization PassengerServiceImpl
+     * @param passengerDao
+     */
     public PassengerServiceImpl(PassengerDao passengerDao) {
         this.passengerDao = passengerDao;
     }
-
 
     @Override
     @Transactional(readOnly = true)

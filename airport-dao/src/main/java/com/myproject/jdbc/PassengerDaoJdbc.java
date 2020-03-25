@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import static com.myproject.constansts.PassengerConstants.*;
+import static com.myproject.constants.PassengerConstants.*;
 
 public class PassengerDaoJdbc implements PassengerDao {
     @Value("${passenger.select}")

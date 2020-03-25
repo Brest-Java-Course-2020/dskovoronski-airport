@@ -17,7 +17,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
-import static com.myproject.constansts.FlightConstants.*;
+import static com.myproject.constants.FlightConstants.*;
 
 public class FlightDaoJdbc implements FlightDao {
 
