@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -56,7 +56,7 @@ public class FlightDaoJdbcIT {
     public void shouldCreateFlight() {
         Flight flight = new Flight();
         flight.setDirection(RandomStringUtils.randomAlphabetic(10));
-        flight.setDate(new Date((long) (Math.random()*100000000)));
+        flight.setDateFlight(LocalDate.now());
         Integer id = fLightDao.create(flight);
         assertNotNull(id);
     }

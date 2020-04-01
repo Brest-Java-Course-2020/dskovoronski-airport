@@ -1,7 +1,16 @@
 package com.myproject.model.dto;
 
-import java.sql.Date;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDate;
+
+/**
+ * POJO FlightDto for model.
+ */
+@SuppressFBWarnings(value = { "EI_EXPOSE_REP", "EI_EXPOSE_REP2" }
+        , justification = "I prefer to suppress these FindBugs warnings")
 public class FlightDto {
 
     /**
@@ -14,12 +23,12 @@ public class FlightDto {
      * Constructor with Flight number, name of route flight and date
      * @param flightId Flight number
      * @param direction name of route flight
-     * @param date Date of flight
+     * @param dateFlight Date of flight
      */
-    public FlightDto(Integer flightId, String direction, Date date) {
+    public FlightDto(Integer flightId, String direction, LocalDate dateFlight) {
         this.flightId = flightId;
         this.direction = direction;
-        this.date = date == null ? null : (Date) date.clone();
+        this.dateFlight = dateFlight;
     }
 
     /**
@@ -35,7 +44,8 @@ public class FlightDto {
     /**
      * Date of flight
      */
-    private Date date;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private LocalDate dateFlight;
 
      /**
      * Quantity of passengers
@@ -76,18 +86,19 @@ public class FlightDto {
 
     /**
      * Return Date of flight
-     * @return date
+     * @return dateFlight
      */
-    public Date getDate() {
-        return date == null ? null : (Date) date.clone();
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    public LocalDate getDateFlight() {
+        return dateFlight;
     }
 
     /**
      * Set Date of flight
-     * @param date
+     * @param dateFlight
      */
-    public void setDate(Date date) {
-        this.date = date == null ? null : (Date) date.clone();
+    public void setDateFlight(LocalDate dateFlight) {
+        this.dateFlight = dateFlight;
     }
 
     /**

@@ -1,10 +1,16 @@
 package com.myproject.model;
 
-import java.sql.Date;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.time.LocalDate;
 
 /**
  * POJO Flight for model.
  */
+@SuppressFBWarnings(value = { "EI_EXPOSE_REP", "EI_EXPOSE_REP2" }
+        , justification = "I prefer to suppress these FindBugs warnings")
 public class Flight {
 
     /**
@@ -17,12 +23,12 @@ public class Flight {
      * Constructor with Flight id, name of route flight and date.
      * @param flightId Flight id.
      * @param direction name of direction flight.
-     * @param date Date of flight.
+     * @param dateFlight Date of flight.
      */
-    public Flight(Integer flightId, String direction, Date date) {
+    public Flight(Integer flightId, String direction, LocalDate dateFlight) {
         this.flightId = flightId;
         this.direction = direction;
-        this.date = date == null ? null : (Date) date.clone();
+        this.dateFlight = dateFlight;
     }
 
     /**
@@ -38,9 +44,10 @@ public class Flight {
     /**
      * Date of flight.
      */
-    private Date date;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private LocalDate dateFlight;
 
-    /**
+       /**
      * Return Flight id.
      * @return flightId.
      */
@@ -58,7 +65,7 @@ public class Flight {
 
     /**
      * Return name of direction flight.
-     * @return direction .
+     * @return direction.
      */
     public String getDirection() {
         return direction;
@@ -76,16 +83,17 @@ public class Flight {
      * Return Date of flight.
      * @return date Date of flight.
      */
-    public Date getDate() {
-        return date == null ? null : (Date) date.clone();
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    public LocalDate getDateFlight() {
+        return dateFlight;
     }
 
     /**
      * Set Date of flight.
-     * @param date Date of flight.
+     * @param dateFlight Date of flight.
      */
-    public void setDate(Date date) {
-        this.date = date == null ? null : (Date) date.clone();
+    public void setDateFlight(LocalDate dateFlight) {
+        this.dateFlight = dateFlight;
     }
 
 }

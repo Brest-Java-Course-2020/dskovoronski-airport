@@ -6,15 +6,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.support.DataAccessUtils;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.*;
 
 import static com.myproject.constants.FlightConstants.*;
@@ -38,8 +36,6 @@ public class FlightDaoJdbc implements FlightDao {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(FlightDaoJdbc.class);
 
-    private final FlightRowMapper flightRowMapper = new FlightRowMapper();
-
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     public FlightDaoJdbc(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
@@ -50,14 +46,15 @@ public class FlightDaoJdbc implements FlightDao {
     @Override
     public List<Flight> findAll() {
         LOGGER.trace("findAll()");
-        return namedParameterJdbcTemplate.query(selectSql, flightRowMapper);
+        return namedParameterJdbcTemplate.query(selectSql,  BeanPropertyRowMapper.newInstance(Flight.class));
     }
 
     @Override
     public Optional<Flight> findById(Integer flightId) {
         LOGGER.debug("findById(flight_id:{})", flightId);
         SqlParameterSource namedParameters = new MapSqlParameterSource("flight_id", flightId);
-        List<Flight> results = namedParameterJdbcTemplate.query(findByIdSql, namedParameters, flightRowMapper);
+        List<Flight> results = namedParameterJdbcTemplate.query(
+                findByIdSql, namedParameters, BeanPropertyRowMapper.newInstance(Flight.class));
         return Optional.ofNullable(DataAccessUtils.uniqueResult(results));
     }
 
@@ -65,8 +62,9 @@ public class FlightDaoJdbc implements FlightDao {
     public Integer create(Flight flight) {
         LOGGER.debug("create(flight:{})", flight);
         MapSqlParameterSource params = new MapSqlParameterSource();
+        params.addValue(FLIGHT_ID, flight.getFlightId());
         params.addValue(DIRECTION, flight.getDirection());
-        params.addValue(DATE_FLIGHT, flight.getDate());
+        params.addValue(DATE_FLIGHT, flight.getDateFlight());
         KeyHolder keyHolder = new GeneratedKeyHolder();
         namedParameterJdbcTemplate.update(createSql, params, keyHolder);
         return keyHolder.getKey().intValue();
@@ -78,6 +76,7 @@ public class FlightDaoJdbc implements FlightDao {
         Map<String, Object> params = new HashMap<>();
         params.put(FLIGHT_ID, flight.getFlightId());
         params.put(DIRECTION, flight.getDirection());
+        params.put(DATE_FLIGHT, flight.getDateFlight());
         return namedParameterJdbcTemplate.update(updateSql, params);
     }
 
@@ -87,18 +86,6 @@ public class FlightDaoJdbc implements FlightDao {
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
         mapSqlParameterSource.addValue(FLIGHT_ID, flightId);
         return namedParameterJdbcTemplate.update(deleteSql, mapSqlParameterSource);
-    }
-
-    private static class FlightRowMapper implements RowMapper<Flight> {
-
-        @Override
-        public Flight mapRow(ResultSet resultSet, int i) throws SQLException {
-            Flight flight = new Flight();
-            flight.setFlightId(resultSet.getInt(FLIGHT_ID));
-            flight.setDirection(resultSet.getString(DIRECTION));
-            flight.setDate(resultSet.getDate(DATE_FLIGHT));
-            return flight;
-        }
     }
 
 }

@@ -7,13 +7,17 @@ import com.myproject.dao.FlightDtoDao;
 import org.springframework.beans.factory.annotation.Value;
 
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
-import java.util.Date;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 
 import static com.myproject.constants.FlightConstants.*;
+
 
 public class FlightDtoDaoJdbc implements FlightDtoDao {
 
@@ -31,6 +35,7 @@ public class FlightDtoDaoJdbc implements FlightDtoDao {
     @Value("${flightDto.findAllWithQuantityPassengersAndDateFilter}")
     private String findAllWithQuantityPassengersAndDateFilter;
 
+    //FlightDtoRowMapper flightDtoRowMapper= new FlightDtoRowMapper();
 
     @Override
     public List<FlightDto> findAllWithQuantityPassengers() {
@@ -41,8 +46,8 @@ public class FlightDtoDaoJdbc implements FlightDtoDao {
     }
 
     @Override
-    public List<FlightDto> findAllWithQuantityPassengersAndDateFilter(Date dateFrom, Date dateTo) {
-        LOGGER.debug("findAllWithQuantityPassengersAndDateFilter(Date dateFrom, Date dateTo:{})");
+    public List<FlightDto> findAllWithQuantityPassengersAndDateFilter(LocalDate dateFrom, LocalDate dateTo) {
+        LOGGER.debug("findAllWithQuantityPassengersAndDateFilter(Date dateFrom=:{}, Date dateTo=:{})", dateFrom, dateTo);
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
         mapSqlParameterSource.addValue(DATE_FROM, dateFrom);
         mapSqlParameterSource.addValue(DATE_TO, dateTo);
@@ -50,5 +55,16 @@ public class FlightDtoDaoJdbc implements FlightDtoDao {
                 (findAllWithQuantityPassengersAndDateFilter,mapSqlParameterSource,BeanPropertyRowMapper.newInstance(FlightDto.class));
         return flights;
     }
-
+//    private static class FlightDtoRowMapper implements RowMapper<FlightDto> {
+//
+//        @Override
+//        public FlightDto mapRow(ResultSet resultSet, int i) throws SQLException {
+//            FlightDto flightDto = new FlightDto();
+//            flightDto.setFlightId(resultSet.getInt(FLIGHT_ID));
+//            flightDto.setDirection(resultSet.getString(DIRECTION));
+//            flightDto.setDate(resultSet.(DATE_FLIGHT));
+//            flightDto.setQuantityPassengers(resultSet.get);
+//            return flightDto;
+//            }
+//    }
 }

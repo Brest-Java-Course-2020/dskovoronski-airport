@@ -9,8 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import static org.junit.Assert.assertNotNull;
@@ -19,6 +18,7 @@ import static org.junit.Assert.assertTrue;
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(locations = {"classpath*:test-db.xml", "classpath*:test-dao.xml", "classpath:dao.xml"})
 public class FlightDtoDaoJdbcIT {
+
     @Autowired
     FlightDtoDao flightDtoDao;
 
@@ -32,13 +32,14 @@ public class FlightDtoDaoJdbcIT {
 
     @Test
     public void findAllWithQuantityPassengersAndDateFilter() {
-        Date dateFrom = new Date();
-        long milliSeconds =  9999999999999L;
-        Date dateTo = new Date(milliSeconds);
+        LocalDate dateFrom = LocalDate.now().minusMonths(1);
+        LocalDate dateTo = LocalDate.now();
         assertTrue(dateFrom.compareTo(dateTo)<0);
         List<FlightDto> flights = flightDtoDao.findAllWithQuantityPassengersAndDateFilter(dateFrom,dateTo);
         assertNotNull(flights);
-        assertTrue(flights.size() > 0);
+        List<FlightDto> flightList = flightDtoDao.findAllWithQuantityPassengersAndDateFilter(dateFrom,dateTo);
+        assertTrue(flightList.size() > 0);
+
     }
 
 }

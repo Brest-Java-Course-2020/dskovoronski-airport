@@ -45,7 +45,8 @@
                                         class="btn btn-light btn-block"><i
                     class="fa fa-arrow-left"></i></a></li>
         </ul>
-        <span class="navbar-brand text-uppercase mr-auto">Edit flights</span>
+        <span class="navbar-brand text-uppercase mr-auto"
+              th:text="${isNew} ? 'New flight' : 'Edit flight'">Edit flights</span>
     </nav>
 </header>
 
@@ -94,10 +95,10 @@
                                 <label class="form-control-label"
                                        for="date_of_flight">Date of flight</label>
                                 <input class="form-control "
-                                       th:class="${#fields.hasErrors('date')} ? 'form-control is-invalid' : 'form-control'"
+                                       th:class="${#fields.hasErrors('dateFlight')} ? 'form-control is-invalid' : 'form-control'"
                                        id="date_of_flight"
                                        type="date" value=""
-                                       th:field="*{date}"/>
+                                       th:field="*{dateFlight}"/>
                                 <div th:if="${#fields.hasErrors('date')}"
                                      class="invalid-feedback"
                                      th:errors="*{date}">[errors]</div>
@@ -111,6 +112,7 @@
                                    data-placement="top">Cancel</a>
                                 <a href="flights.html"
                                    th:href="@{/flights}"
+                                   th:onclick="@{document.forms['flightForm'].submit(); return false;}"
                                    class="btn btn-primary"
                                    title="Save flights"
                                    data-toggle="tooltip"

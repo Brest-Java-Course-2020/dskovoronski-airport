@@ -1,6 +1,5 @@
 package com.myproject;
 
-import com.myproject.dao.FlightDtoDao;
 import com.myproject.model.dto.FlightDto;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -8,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import static org.junit.Assert.assertNotNull;
@@ -30,12 +29,12 @@ public class FlightDtoServiceImplIT {
     }
     @Test
     public void findAllWithQuantityPassengersAndDateFilter() {
-        Date dateFrom = new Date();
-        long milliSeconds = 9999999999999L;
-        Date dateTo = new Date(milliSeconds);
+        LocalDate dateFrom = LocalDate.now().minusMonths(1);
+        LocalDate dateTo = LocalDate.now();
         assertTrue(dateFrom.compareTo(dateTo)<0);
         List<FlightDto> flights = flightDtoService.findAllWithQuantityPassengersAndDateFilter(dateFrom,dateTo);
         assertNotNull(flights);
-        assertTrue(flights.size() > 0);
+        List<FlightDto> flightList = flightDtoService.findAllWithQuantityPassengersAndDateFilter(dateFrom,dateTo);
+        assertTrue(flightList.size() > 0);
     }
 }

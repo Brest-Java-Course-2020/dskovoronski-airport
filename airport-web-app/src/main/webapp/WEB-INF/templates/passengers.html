@@ -74,7 +74,7 @@
                             <td th:text="${passenger.flightId}">101</td>
                             <td class="text-right">
                                 <a href="passenger.html"
-                                   th:href="@{/passenger/${passenger.passengerId}"
+                                   th:href="@{|/passenger/${passenger.passengerId}|}"
                                    class="btn-sm btn-outline-secondary"
                                    title="Edit passenger"
                                    data-toggle="tooltip"
@@ -85,7 +85,7 @@
                                       data-target="#deleteDialog"
                                       th:attr="data-id=${passenger.passengerId},data-name=${passenger.firstname}">
                                 <a href="#" class="btn-sm btn-outline-secondary"
-                                   title="Delete passenger"
+                                   title="delete passenger"
                                    data-toggle="tooltip"
                                    data-placement="top">
                                     <i class="fa fa-remove"></i> <span class="d-none d-md-inline">Delete</span></a>
@@ -93,8 +93,8 @@
                             </td>
                         </tr>
                         <tr th:remove="all">
-                            <td>Nickolai</td>
-                            <td>Kroch</td>
+                            <td>Alexander</td>
+                            <td>Ivanov</td>
                             <td>105</td>
                             <td class="text-right">
                                 <a href="passenger.html"
@@ -107,51 +107,7 @@
                                         class="d-none d-md-inline">Edit</span></a>
                                 <span data-toggle="modal" data-target="#deleteDialog">
                                 <a href="#" class="btn-sm btn-outline-secondary"
-                                   title="Delete passenger"
-                                   data-toggle="tooltip"
-                                   data-placement="top">
-                                    <i class="fa fa-remove"></i> <span class="d-none d-md-inline">Delete</span></a>
-                                </span>
-                            </td>
-                        </tr>
-                        <tr th:remove="all">
-                            <td>Ann</td>
-                            <td>Loza</td>
-                            <td>101</td>
-                            <td class="text-right">
-                                <a href="passenger.html"
-                                   th:href="@{/passenger}"
-                                   class="btn-sm btn-outline-secondary"
-                                   title="Edit passenger"
-                                   data-toggle="tooltip"
-                                   data-placement="top">
-                                    <i class="fa fa-pencil"></i> <span
-                                        class="d-none d-md-inline">Edit</span></a>
-                                <span data-toggle="modal" data-target="#deleteDialog">
-                                <a href="#" class="btn-sm btn-outline-secondary"
-                                   title="Delete passenger"
-                                   data-toggle="tooltip"
-                                   data-placement="top">
-                                    <i class="fa fa-remove"></i> <span class="d-none d-md-inline">Delete</span></a>
-                                </span>
-                            </td>
-                        </tr>
-                        <tr th:remove="all">
-                            <td>Sonia</td>
-                            <td>Govin</td>
-                            <td>104</td>
-                            <td class="text-right">
-                                <a href="passenger.html"
-                                   th:href="@{/passenger}"
-                                   class="btn-sm btn-outline-secondary"
-                                   title="Edit passenger"
-                                   data-toggle="tooltip"
-                                   data-placement="top">
-                                    <i class="fa fa-pencil"></i> <span
-                                        class="d-none d-md-inline">Edit</span></a>
-                                <span data-toggle="modal" data-target="#deleteDialog">
-                                <a href="#" class="btn-sm btn-outline-secondary"
-                                   title="Delete passenger"
+                                   title="delete passenger"
                                    data-toggle="tooltip"
                                    data-placement="top">
                                     <i class="fa fa-remove"></i> <span class="d-none d-md-inline">Delete</span></a>
@@ -189,7 +145,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-danger">Delete</button>
+                <a id="deleteUrl" href="#" class="btn btn-danger">Delete</a>
             </div>
         </div>
     </div>

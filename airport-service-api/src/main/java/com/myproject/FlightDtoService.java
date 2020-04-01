@@ -2,7 +2,7 @@ package com.myproject;
 
 import com.myproject.model.dto.FlightDto;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 public interface FlightDtoService {
@@ -18,6 +18,6 @@ public interface FlightDtoService {
      *
      * @return Flights list.
      */
-    List <FlightDto> findAllWithQuantityPassengersAndDateFilter(Date dateFrom, Date dateTo);
+    List <FlightDto> findAllWithQuantityPassengersAndDateFilter(LocalDate dateFrom, LocalDate dateTo);
 
 }

@@ -66,6 +66,7 @@ public class PassengerDaoJdbcIT {
         passenger.setFlightId(101);
         Integer id = passengerDao.create(passenger);
         assertNotNull(id);
+        assertEquals(passenger.getFlightId(),id);
     }
 
     @Test
