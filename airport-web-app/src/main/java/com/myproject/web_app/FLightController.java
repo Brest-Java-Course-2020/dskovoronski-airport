@@ -84,7 +84,6 @@ public class FLightController {
             model.addAttribute("flight", optionalFlight.get());
             return "flight";
         } else {
-            // TODO flight not found - pass error message as parameter or handle not found error
             return "redirect:flights";
         }
     }
@@ -155,6 +154,7 @@ public class FLightController {
 
         LOGGER.debug("delete({},{})", flightId, model);
         flightService.delete(flightId);
+
         return "redirect:/flights";
     }
 }

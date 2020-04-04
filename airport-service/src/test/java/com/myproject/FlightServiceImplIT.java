@@ -9,11 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import java.sql.Date;
+
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+import static com.myproject.constants.FlightConstants.DIRECTION_MAX_SIZE;
 import static org.junit.Assert.*;
 import static org.junit.Assert.assertTrue;
 
@@ -36,7 +37,7 @@ public class FlightServiceImplIT {
 
         // given
         Flight flight = new Flight();
-        flight.setDirection(RandomStringUtils.randomAlphabetic(45));
+        flight.setDirection(RandomStringUtils.randomAlphabetic(DIRECTION_MAX_SIZE));
         Integer id = flightService.create(flight);
 
         // when
@@ -51,7 +52,7 @@ public class FlightServiceImplIT {
     @Test
     public void shouldCreateFlight() {
         Flight flight = new Flight();
-        flight.setDirection(RandomStringUtils.randomAlphabetic(10));
+        flight.setDirection(RandomStringUtils.randomAlphabetic(DIRECTION_MAX_SIZE));
         flight.setDateFlight(LocalDate.now());
         Integer id = flightService.create(flight);
         assertNotNull(id);
@@ -62,7 +63,7 @@ public class FlightServiceImplIT {
 
         // given
         Flight flight = new Flight();
-        flight.setDirection(RandomStringUtils.randomAlphabetic(45));
+        flight.setDirection(RandomStringUtils.randomAlphabetic(DIRECTION_MAX_SIZE));
         Integer id = flightService.create(flight);
         assertNotNull(id);
 
@@ -70,7 +71,7 @@ public class FlightServiceImplIT {
         Assertions.assertTrue(flightOptional.isPresent());
 
         flightOptional.get().
-                setDirection(RandomStringUtils.randomAlphabetic(45));
+                setDirection(RandomStringUtils.randomAlphabetic(DIRECTION_MAX_SIZE));
 
         // when
         int result = flightService.update(flightOptional.get());
@@ -89,7 +90,7 @@ public class FlightServiceImplIT {
     public void shouldDeleteFlight() {
         // given
         Flight flight = new Flight();
-        flight.setDirection(RandomStringUtils.randomAlphabetic(45));
+        flight.setDirection(RandomStringUtils.randomAlphabetic(DIRECTION_MAX_SIZE));
         Integer id = flightService.create(flight);
 
         List<Flight> flights = flightService.findAll();

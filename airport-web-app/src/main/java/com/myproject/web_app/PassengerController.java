@@ -3,8 +3,11 @@ package com.myproject.web_app;
 import com.myproject.FlightService;
 import com.myproject.PassengerService;
 import com.myproject.model.Passenger;
+import com.myproject.web_app.validators.FlightValidator;
+import com.myproject.web_app.validators.PassengerValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -27,6 +30,8 @@ public class PassengerController {
 
     private  final FlightService flightService;
 
+    @Autowired
+    PassengerValidator passengerValidator;
 
     public PassengerController(PassengerService passengerService, FlightService flightService) {
         this.passengerService = passengerService;
@@ -62,7 +67,7 @@ public class PassengerController {
             model.addAttribute("flights", flightService.findAll());
             return "passenger";
         } else {
-            // TODO employee not found - pass error message as parameter or handle not found error
+
             return "redirect:passengers";
         }
     }
@@ -79,7 +84,7 @@ public class PassengerController {
                                  BindingResult result) {
 
         LOGGER.debug("updatePassenger({}, {})", passenger, result);
-        // TODO implement validation
+        passengerValidator.validate(passenger, result);
         if (result.hasErrors()) {
             return "passenger";
         } else {
@@ -115,7 +120,7 @@ public class PassengerController {
                               BindingResult result) {
 
         LOGGER.debug("addPassenger({}, {})", passenger, result);
-        // TODO implement validation
+        passengerValidator.validate(passenger, result);
         if (result.hasErrors()) {
             return "employee";
         } else {

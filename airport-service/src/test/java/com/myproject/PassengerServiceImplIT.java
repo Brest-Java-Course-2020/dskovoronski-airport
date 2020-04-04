@@ -12,6 +12,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import java.util.List;
 import java.util.Optional;
 
+import static com.myproject.constants.PassengerConstants.*;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -36,8 +37,8 @@ public class PassengerServiceImplIT {
 
         // given
         Passenger passenger = new Passenger();
-        passenger.setFirstname(RandomStringUtils.randomAlphabetic(45));
-        passenger.setLastname(RandomStringUtils.randomAlphabetic(45));
+        passenger.setFirstname(RandomStringUtils.randomAlphabetic(FIRST_NAME_SIZE));
+        passenger.setLastname(RandomStringUtils.randomAlphabetic(LAST_NAME_SIZE));
         passenger.setFlightId(101);
 
         Integer id = passengerService.create(passenger);
@@ -56,8 +57,8 @@ public class PassengerServiceImplIT {
     @Test
     public void shouldCreatePassenger() {
         Passenger passenger = new Passenger();
-        passenger.setFirstname(RandomStringUtils.randomAlphabetic(45));
-        passenger.setLastname(RandomStringUtils.randomAlphabetic(45));
+        passenger.setFirstname(RandomStringUtils.randomAlphabetic(FIRST_NAME_SIZE));
+        passenger.setLastname(RandomStringUtils.randomAlphabetic(LAST_NAME_SIZE));
         passenger.setFlightId(101);
         Integer id = passengerService.create(passenger);
         assertNotNull(id);
@@ -68,8 +69,8 @@ public class PassengerServiceImplIT {
 
         // given
         Passenger passenger = new Passenger();
-        passenger.setFirstname(RandomStringUtils.randomAlphabetic(45));
-        passenger.setLastname(RandomStringUtils.randomAlphabetic(45));
+        passenger.setFirstname(RandomStringUtils.randomAlphabetic(FIRST_NAME_SIZE));
+        passenger.setLastname(RandomStringUtils.randomAlphabetic(LAST_NAME_SIZE));
         passenger.setFlightId(101);
         Integer id = passengerService.create(passenger);
         assertNotNull(id);
@@ -79,7 +80,7 @@ public class PassengerServiceImplIT {
         Assertions.assertTrue(optionalPassenger.isPresent());
 
         optionalPassenger.get().
-                setFirstname(RandomStringUtils.randomAlphabetic(45));
+                setFirstname(RandomStringUtils.randomAlphabetic(FIRST_NAME_SIZE));
 
 
         // when
@@ -101,8 +102,8 @@ public class PassengerServiceImplIT {
     public void shouldDeletePassenger() {
         // given
         Passenger passenger = new Passenger();
-        passenger.setFirstname(RandomStringUtils.randomAlphabetic(45));
-        passenger.setLastname(RandomStringUtils.randomAlphabetic(45));
+        passenger.setFirstname(RandomStringUtils.randomAlphabetic(FIRST_NAME_SIZE));
+        passenger.setLastname(RandomStringUtils.randomAlphabetic(LAST_NAME_SIZE));
         passenger.setFlightId(101);
         Integer id = passengerService.create(passenger);
         assertNotNull(id);

@@ -14,6 +14,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+import static com.myproject.constants.FlightConstants.*;
 import static org.junit.Assert.*;
 
 @ExtendWith(SpringExtension.class)
@@ -40,7 +41,7 @@ public class FlightDaoJdbcIT {
 
         // given
         Flight flight = new Flight();
-        flight.setDirection(RandomStringUtils.randomAlphabetic(45));
+        flight.setDirection(RandomStringUtils.randomAlphabetic(DIRECTION_MAX_SIZE));
         Integer id = fLightDao.create(flight);
 
         // when
@@ -55,7 +56,7 @@ public class FlightDaoJdbcIT {
     @Test
     public void shouldCreateFlight() {
         Flight flight = new Flight();
-        flight.setDirection(RandomStringUtils.randomAlphabetic(10));
+        flight.setDirection(RandomStringUtils.randomAlphabetic(DIRECTION_MAX_SIZE));
         flight.setDateFlight(LocalDate.now());
         Integer id = fLightDao.create(flight);
         assertNotNull(id);
@@ -66,7 +67,7 @@ public class FlightDaoJdbcIT {
 
         // given
         Flight flight = new Flight();
-        flight.setDirection(RandomStringUtils.randomAlphabetic(45));
+        flight.setDirection(RandomStringUtils.randomAlphabetic(DIRECTION_MAX_SIZE));
         Integer id = fLightDao.create(flight);
         assertNotNull(id);
 
@@ -74,7 +75,7 @@ public class FlightDaoJdbcIT {
         Assertions.assertTrue(flightOptional.isPresent());
 
         flightOptional.get().
-                setDirection(RandomStringUtils.randomAlphabetic(45));
+                setDirection(RandomStringUtils.randomAlphabetic(DIRECTION_MAX_SIZE));
 
         // when
         int result = fLightDao.update(flightOptional.get());
@@ -93,7 +94,7 @@ public class FlightDaoJdbcIT {
     public void shouldDeleteFlight() {
         // given
         Flight flight = new Flight();
-        flight.setDirection(RandomStringUtils.randomAlphabetic(45));
+        flight.setDirection(RandomStringUtils.randomAlphabetic(DIRECTION_MAX_SIZE));
         Integer id = fLightDao.create(flight);
 
         List<Flight> flights = fLightDao.findAll();

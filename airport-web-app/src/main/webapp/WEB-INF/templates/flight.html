@@ -99,9 +99,9 @@
                                        id="date_of_flight"
                                        type="date" value=""
                                        th:field="*{dateFlight}"/>
-                                <div th:if="${#fields.hasErrors('date')}"
+                                <div th:if="${#fields.hasErrors('dateFlight')}"
                                      class="invalid-feedback"
-                                     th:errors="*{date}">[errors]</div>
+                                     th:errors="*{dateFlight}">[errors]</div>
                             </div>
                             <div class="d-flex justify-content-end">
                                 <a href="flights.html"

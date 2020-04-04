@@ -13,6 +13,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import java.util.List;
 import java.util.Optional;
 
+import static com.myproject.constants.PassengerConstants.*;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -41,8 +42,8 @@ public class PassengerDaoJdbcIT {
 
         // given
         Passenger passenger = new Passenger();
-        passenger.setFirstname(RandomStringUtils.randomAlphabetic(45));
-        passenger.setLastname(RandomStringUtils.randomAlphabetic(45));
+        passenger.setFirstname(RandomStringUtils.randomAlphabetic(FIRST_NAME_SIZE));
+        passenger.setLastname(RandomStringUtils.randomAlphabetic(LAST_NAME_SIZE));
         passenger.setFlightId(101);
 
         Integer id = passengerDao.create(passenger);
@@ -61,12 +62,18 @@ public class PassengerDaoJdbcIT {
     @Test
     public void shouldCreatePassenger() {
         Passenger passenger = new Passenger();
-        passenger.setFirstname(RandomStringUtils.randomAlphabetic(45));
-        passenger.setLastname(RandomStringUtils.randomAlphabetic(45));
+        passenger.setFirstname(RandomStringUtils.randomAlphabetic(FIRST_NAME_SIZE));
+        passenger.setLastname(RandomStringUtils.randomAlphabetic(LAST_NAME_SIZE));
         passenger.setFlightId(101);
         Integer id = passengerDao.create(passenger);
         assertNotNull(id);
-        assertEquals(passenger.getFlightId(),id);
+        assertEquals(passengerDao.findById(id).get().getPassengerId(),id);
+
+        Optional<Passenger> optionalPassenger = passengerDao.findById(id);
+
+        assertEquals(optionalPassenger.get().getFirstname(), passenger.getFirstname());
+        assertEquals(optionalPassenger.get().getLastname(), passenger.getLastname());
+
     }
 
     @Test
@@ -74,8 +81,8 @@ public class PassengerDaoJdbcIT {
 
         // given
         Passenger passenger = new Passenger();
-        passenger.setFirstname(RandomStringUtils.randomAlphabetic(45));
-        passenger.setLastname(RandomStringUtils.randomAlphabetic(45));
+        passenger.setFirstname(RandomStringUtils.randomAlphabetic(FIRST_NAME_SIZE));
+        passenger.setLastname(RandomStringUtils.randomAlphabetic(LAST_NAME_SIZE));
         passenger.setFlightId(101);
         Integer id = passengerDao.create(passenger);
         assertNotNull(id);
@@ -85,7 +92,7 @@ public class PassengerDaoJdbcIT {
         Assertions.assertTrue(optionalPassenger.isPresent());
 
         optionalPassenger.get().
-                setFirstname(RandomStringUtils.randomAlphabetic(45));
+                setFirstname(RandomStringUtils.randomAlphabetic(FIRST_NAME_SIZE));
 
 
         // when
@@ -107,8 +114,8 @@ public class PassengerDaoJdbcIT {
     public void shouldDeletePassenger() {
         // given
         Passenger passenger = new Passenger();
-        passenger.setFirstname(RandomStringUtils.randomAlphabetic(45));
-        passenger.setLastname(RandomStringUtils.randomAlphabetic(45));
+        passenger.setFirstname(RandomStringUtils.randomAlphabetic(FIRST_NAME_SIZE));
+        passenger.setLastname(RandomStringUtils.randomAlphabetic(LAST_NAME_SIZE));
         passenger.setFlightId(101);
         Integer id = passengerDao.create(passenger);
         assertNotNull(id);

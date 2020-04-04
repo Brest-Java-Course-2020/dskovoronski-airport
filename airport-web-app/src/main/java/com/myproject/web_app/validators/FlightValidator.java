@@ -7,6 +7,8 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
+import static com.myproject.constants.FlightConstants.DIRECTION_MAX_SIZE;
+
 @Component
 public class FlightValidator implements Validator  {
 
@@ -22,7 +24,7 @@ public class FlightValidator implements Validator  {
         Flight flight = (Flight) target;
 
         if (StringUtils.hasLength(flight.getDirection())
-                && flight.getDirection().length() > 30) {
+                && flight.getDirection().length() > DIRECTION_MAX_SIZE) {
             errors.rejectValue("direction", "direction.maxSize");
         }
     }

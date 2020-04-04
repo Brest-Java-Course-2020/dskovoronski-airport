@@ -6,4 +6,7 @@ public class PassengerConstants {
     public static final String LAST_NAME = "lastname";
     public static final String FLIGHT_ID = "flight_id";
 
+    public static final int FIRST_NAME_SIZE = 20;
+    public static final int LAST_NAME_SIZE = 30;
+
 }

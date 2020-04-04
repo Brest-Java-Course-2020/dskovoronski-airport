@@ -8,8 +8,8 @@ CREATE TABLE flights (
 );
 CREATE TABLE passengers (
   passenger_id INt NOT NULL AUTO_INCREMENT,
-  firstname VARCHAR(45) NOT NULL,
-  lastname VARCHAR(45) NOT NULL,
+  firstname VARCHAR(20) NOT NULL,
+  lastname VARCHAR(30) NOT NULL,
   flight_id INTEGER NOT NULL,
   PRIMARY KEY (passenger_id),
  	FOREIGN KEY (flight_id)
