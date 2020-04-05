@@ -9,4 +9,7 @@ public class PassengerConstants {
     public static final int FIRST_NAME_SIZE = 20;
     public static final int LAST_NAME_SIZE = 30;
 
+    public static final String PASSENGER_NOT_FOUND = "passenger not found";
+    public static final String PASSENGER_NOT_FOUND_BY_ID = "passenger not found by id: ";
+
 }
