@@ -13,8 +13,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Optional;
 
-import static com.myproject.constants.FlightConstants.*;
-
+import static com.myproject.constants.restConstants.*;
 
 /**
  * Flight rest Controller
@@ -25,7 +24,6 @@ public class FlightController {
     private static final Logger LOGGER = LoggerFactory.getLogger(FlightController.class);
 
     private final FlightService flightService;
-
 
     public FlightController(FlightService flightService) {
         this.flightService = flightService;

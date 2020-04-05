@@ -9,7 +9,4 @@ public class FlightConstants {
 
     public static final int DIRECTION_MAX_SIZE=45;
 
-    public static final String FLIGHT_NOT_FOUND = "flight not found";
-    public static final String FLIGHT_NOT_FOUND_BY_ID = "flight not found by id: ";
-
 }

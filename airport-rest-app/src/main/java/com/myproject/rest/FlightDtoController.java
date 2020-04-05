@@ -28,7 +28,7 @@ public class FlightDtoController {
      *
      * @return Department Dtos collection.
      */
-    @GetMapping(value = "/flight_quantity")
+    @GetMapping(value = "/flights_quantity")
     public final Collection<FlightDto> flightDtos() {
 
         LOGGER.debug("flightDtos()");

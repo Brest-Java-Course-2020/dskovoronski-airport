@@ -13,7 +13,8 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Optional;
 
-import static com.myproject.constants.PassengerConstants.*;
+import static com.myproject.constants.restConstants.*;
+
 /**
  * Passenger Rest Controller
  */
@@ -24,7 +25,7 @@ public class PassengerController {
 
     private final PassengerService passengerService;
 
-    public PassengerController(PassengerService passengerService) {
+   public PassengerController(PassengerService passengerService) {
         this.passengerService = passengerService;
     }
 
