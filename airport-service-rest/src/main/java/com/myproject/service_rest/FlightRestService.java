@@ -2,7 +2,6 @@ package com.myproject.service_rest;
 
 import com.myproject.FlightService;
 import com.myproject.model.Flight;
-import com.myproject.model.Passenger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.*;
