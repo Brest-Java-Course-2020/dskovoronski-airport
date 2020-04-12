@@ -15,7 +15,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-import static com.myproject.constants.FlightConstants.DIRECTION_MAX_SIZE;
+import static com.myproject.constants.FlightConstants.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 
