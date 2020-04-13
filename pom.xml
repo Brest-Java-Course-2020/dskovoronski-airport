@@ -17,6 +17,7 @@
         <module>airport-service-api</module>
         <module>airport-service</module>
         <module>airport-rest-app</module>
+        <module>airport-service-rest</module>
     </modules>
 
     <properties>

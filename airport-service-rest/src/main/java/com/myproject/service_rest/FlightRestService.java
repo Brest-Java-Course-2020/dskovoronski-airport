@@ -41,21 +41,20 @@ public class FlightRestService implements FlightService {
 
     @Override
     public Integer create(Flight flight) {
+        LOGGER.debug("create ({})", flight);
+        ResponseEntity responseEntity = restTemplate.postForEntity(url, flight, Integer.class);
+        return (Integer) responseEntity.getBody();
+    }
+
+    @Override
+    public int update(Flight flight) {
         LOGGER.debug("update({})", flight);
         // restTemplate.put(url, department); if method would be void
-
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
         HttpEntity<Flight> entity = new HttpEntity<>(flight, headers);
         ResponseEntity<Integer> result = restTemplate.exchange(url, HttpMethod.PUT, entity, Integer.class);
         return result.getBody();
-    }
-
-    @Override
-    public int update(Flight flight) {
-        LOGGER.debug("create({})", flight);
-        ResponseEntity responseEntity = restTemplate.postForEntity(url, flight,Integer.class);
-        return (Integer) responseEntity.getBody();
     }
 
     @Override

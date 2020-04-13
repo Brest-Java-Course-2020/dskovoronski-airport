@@ -23,7 +23,7 @@ public class FlightDtoDaoJdbcIT {
     FlightDtoDao flightDtoDao;
 
     @Test
-    public void shouldFindAllWithAvgSalary() {
+    public void shouldFindAllWithQuantityPassengers() {
         List<FlightDto> flights = flightDtoDao.findAllWithQuantityPassengers();
         assertNotNull(flights);
         assertTrue(flights.size() > 0);
