@@ -50,30 +50,13 @@ public class FlightDtoControllerIT {
     @Test
     public void shouldFindAllWithQuantityPassengersAndDateFilter() throws Exception {
 
-        LocalDate localDate = LocalDate.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        String dateExample = localDate.format(formatter);
         LocalDate dateFrom = LocalDate.of(2020,4,1);
         LocalDate dateTo = LocalDate.of(2020,5,1);
         Mockito.when(flightDtoService.findAllWithQuantityPassengersAndDateFilter(dateFrom, dateTo)).thenReturn(Arrays.asList(create(0), create(1)));
 
-        LOGGER.debug("DateExample= {}", dateExample);
+        LOGGER.debug("should find all with quantity passengers and date filter");
 
-        mockMvc.perform(
-                MockMvcRequestBuilders.get("/flightsDto" + "?dateFrom=" + dateFrom + "&dateTo=" + dateTo)
-        ).andDo(MockMvcResultHandlers.print())
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().contentType("application/json;charset=UTF-8"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[0].flightId", Matchers.is(0)))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[0].direction", Matchers.is("direction0")))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[0].dateFlight", Matchers.is(dateExample)))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[0].quantityPassengers", Matchers.is(0)))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[1].flightId", Matchers.is(1)))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[1].direction", Matchers.is("direction1")))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[1].dateFlight", Matchers.is(dateExample)))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[1].quantityPassengers", Matchers.is(1)))
-
-        ;
+        getMockMvc("/flightsDto?dateFrom=" + dateFrom + "&dateTo=" + dateTo);
 
         Mockito.verify(flightDtoService).findAllWithQuantityPassengersAndDateFilter(dateFrom, dateTo);
     }
@@ -81,15 +64,22 @@ public class FlightDtoControllerIT {
     @Test
     public void shouldFindAllWithQuantityPassengers() throws Exception {
 
+        Mockito.when(flightDtoService.findAllWithQuantityPassengers()).thenReturn(Arrays.asList(create(0), create(1)));
+
+        LOGGER.debug("should find all with quantity passengers");
+
+        getMockMvc("/flightsDto/quantity");
+
+        Mockito.verify(flightDtoService).findAllWithQuantityPassengers();
+    }
+
+    private MockMvc getMockMvc(String urlTemplate) throws Exception {
         LocalDate localDate = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         String dateExample = localDate.format(formatter);
-        Mockito.when(flightDtoService.findAllWithQuantityPassengers()).thenReturn(Arrays.asList(create(0), create(1)));
 
-        LOGGER.debug("DateExample= {}", dateExample);
-
-        mockMvc.perform(
-                MockMvcRequestBuilders.get("/flightsDto/quantity")
+         mockMvc.perform(
+                MockMvcRequestBuilders.get(urlTemplate)
         ).andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType("application/json;charset=UTF-8"))
@@ -101,10 +91,8 @@ public class FlightDtoControllerIT {
                 .andExpect(MockMvcResultMatchers.jsonPath("$[1].direction", Matchers.is("direction1")))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[1].dateFlight", Matchers.is(dateExample)))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[1].quantityPassengers", Matchers.is(1)))
-
-        ;
-
-        Mockito.verify(flightDtoService).findAllWithQuantityPassengers();
+                ;;
+        return mockMvc;
     }
 
     private FlightDto create(int index){
