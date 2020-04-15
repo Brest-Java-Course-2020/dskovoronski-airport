@@ -17,7 +17,7 @@ import java.util.Collection;
  * FlightDto rest Controller
  */
 @RestController
-@RequestMapping("/flightsDto")
+@RequestMapping(value = "/flightsDto")
 public class FlightDtoController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(FlightDtoController.class);
@@ -28,19 +28,9 @@ public class FlightDtoController {
         this.flightDtoService = flightDtoService;
     }
 
-    /**
-     * Get flight with quantity passengers.
-     *
-     * @return Department Dtos collection.
-     */
-    @GetMapping(value = "/flights_quantity")
-    public final Collection<FlightDto> flightDtos() {
-
-        LOGGER.debug("flight Dtos()");
-        return flightDtoService.findAllWithQuantityPassengers();
-    }
 
     /**
+     * Find flights with date Filter
      * @param dateFrom
      * @param dateTo
      * @return Collection of flights with date filter
@@ -48,9 +38,21 @@ public class FlightDtoController {
     @GetMapping
     public Collection<FlightDto> findDtoWithDateFilter
     (@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateFrom
-            , @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateTo) {
+     , @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateTo) {
 
         LOGGER.debug("find with date filter({},{})", dateFrom, dateTo);
         return flightDtoService.findAllWithQuantityPassengersAndDateFilter(dateFrom, dateTo);
     }
+    /**
+     * Get flight with quantity passengers.
+     *
+     * @return Flights Dtos collection.
+     */
+    @GetMapping("/quantity")
+    public final Collection<FlightDto> flightWithQuantityPassengers() {
+
+        LOGGER.debug("flights find all with quantity passengers()");
+        return flightDtoService.findAllWithQuantityPassengers();
+    }
+
 }
