@@ -41,7 +41,7 @@
         <ul class="navbar-nav float-right">
             <li class="nav-item">
                 <a href="flight.html"
-                   th:href="@{/flight}"
+                   th:href="@{/flights/add}"
                    class="btn btn-light"
                    title="Add flight"
                    data-toggle="tooltip"
@@ -99,7 +99,7 @@
                             <td th:text="${flight.quantityPassengers}">4</td>
                             <td class="text-right">
                                 <a href="flight.html"
-                                   th:href="@{|/flight/${flight.flightId}|}"
+                                   th:href="@{|/flights/${flight.flightId}|}"
                                    class="btn-sm btn-outline-secondary"
                                    title="Edit flight"
                                    data-toggle="tooltip"
@@ -165,7 +165,7 @@
     $('#deleteDialog').on('show.bs.modal', function (event) {
         var target = $(event.relatedTarget)
         $(this).find('.modal-body').text('Please confirm delete flight: "' + target.data('name') + '"')
-        document.getElementById('deleteUrl').href = '/flight/' + target.data('id') + '/delete';
+        document.getElementById('deleteUrl').href = '/flights/' + target.data('id') + '/delete';
     })
     $(function () {
         $('[data-toggle="tooltip"]').tooltip()

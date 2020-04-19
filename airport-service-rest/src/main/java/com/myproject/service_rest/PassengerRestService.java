@@ -63,7 +63,7 @@ public class PassengerRestService implements PassengerService {
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
         HttpEntity<Integer> entity = new HttpEntity<>(passengerId,headers);
-        ResponseEntity responseEntity = restTemplate.exchange(url + passengerId, HttpMethod.DELETE,entity,Integer.class);
+        ResponseEntity responseEntity = restTemplate.exchange(url +"/" + passengerId, HttpMethod.DELETE,entity,Integer.class);
 
         return (Integer) responseEntity.getBody();
 

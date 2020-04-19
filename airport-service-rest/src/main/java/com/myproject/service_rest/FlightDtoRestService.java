@@ -28,7 +28,7 @@ public class FlightDtoRestService implements FlightDtoService {
     @Override
     public List<FlightDto> findAllWithQuantityPassengers() {
         LOGGER.debug("quantity passengers()");
-        ResponseEntity<List> responseEntity = restTemplate.getForEntity(url + "/findAll", List.class);
+        ResponseEntity<List> responseEntity = restTemplate.getForEntity(url + "/quantity", List.class);
         return responseEntity.getBody();
     }
 

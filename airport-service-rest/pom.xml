@@ -95,10 +95,7 @@
             <artifactId>commons-lang3</artifactId>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>com.myproject</groupId>
-            <artifactId>airport-service-api</artifactId>
-        </dependency>
+
 
     </dependencies>
 </project>

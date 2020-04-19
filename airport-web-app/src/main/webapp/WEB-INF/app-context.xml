@@ -20,44 +20,77 @@
     <!-- Component scan for @Controller, @Service... annotations -->
     <context:component-scan base-package="com.myproject.*"/>
 
-    <import resource="classpath*:test-db.xml"/>
+<!--    <import resource="classpath*:test-db.xml"/>-->
 
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
             <list>
                 <value>classpath:application.properties</value>
-                <value>classpath:dao.properties</value>
+<!--                <value>classpath:dao.properties</value>-->
             </list>
         </property>
     </bean>
 
-    <bean id="passengerService" class="com.myproject.PassengerServiceImpl">
-        <constructor-arg ref="passengerDao"/>
+    <bean id="flightsController" class="com.myproject.web_app.FLightController">
+        <constructor-arg index="0" ref="flightsRestService"/>
+        <constructor-arg index="0" ref="flightsDtoRestService"/>
     </bean>
 
-    <bean id="passengerDao" class="com.myproject.jdbc.PassengerDaoJdbc">
-        <constructor-arg ref="namedParameterJdbcTemplate"/>
+    <bean id="passengersController" class="com.myproject.web_app.PassengerController">
+        <constructor-arg index="0" ref="passengersRestService"/>
+        <constructor-arg index="1" ref="flightsRestService "/>
     </bean>
 
-    <bean id="flightService" class="com.myproject.FlightServiceImpl">
-        <constructor-arg ref="flightDao"/>
+    <bean id="flightsDtoRestService" class="com.myproject.service_rest.FlightDtoRestService">
+        <constructor-arg index="0" value="${protocol}://${host}:${port}/${point.flightsDto}"/>
+        <constructor-arg index="1" ref="restTemplate"/>
     </bean>
 
-    <bean id="flightDao" class="com.myproject.jdbc.FlightDaoJdbc">
-        <constructor-arg ref="namedParameterJdbcTemplate"/>
+    <bean id="flightsRestService" class="com.myproject.service_rest.FlightRestService">
+        <constructor-arg index="0" value="${protocol}://${host}:${port}/${point.flights}"/>
+        <constructor-arg index="1" ref="restTemplate"/>
     </bean>
 
-    <bean id="flightDtoService" class="com.myproject.FlightDtoServiceImpl">
-        <constructor-arg ref="flightDtoDao"/>
+    <bean id="passengersRestService" class="com.myproject.service_rest.PassengerRestService">
+        <constructor-arg index="0" value="${protocol}://${host}:${port}/${point.passengers}"/>
+        <constructor-arg index="1" ref="restTemplate"/>
     </bean>
 
-    <bean id="flightDtoDao" class="com.myproject.jdbc.FlightDtoDaoJdbc">
-        <constructor-arg ref="namedParameterJdbcTemplate"/>
+    <bean id="restTemplate" class="org.springframework.web.client.RestTemplate">
+        <property name="messageConverters">
+            <list>
+                <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
+            </list>
+        </property>
     </bean>
 
-    <bean id="namedParameterJdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
-        <constructor-arg name="dataSource" ref="dataSource"/>
-    </bean>
+<!--    <bean id="passengerService" class="com.myproject.PassengerServiceImpl">-->
+<!--        <constructor-arg ref="passengerDao"/>-->
+<!--    </bean>-->
+
+<!--    <bean id="passengerDao" class="com.myproject.jdbc.PassengerDaoJdbc">-->
+<!--        <constructor-arg ref="namedParameterJdbcTemplate"/>-->
+<!--    </bean>-->
+
+<!--    <bean id="flightService" class="com.myproject.FlightServiceImpl">-->
+<!--        <constructor-arg ref="flightDao"/>-->
+<!--    </bean>-->
+
+<!--    <bean id="flightDao" class="com.myproject.jdbc.FlightDaoJdbc">-->
+<!--        <constructor-arg ref="namedParameterJdbcTemplate"/>-->
+<!--    </bean>-->
+
+<!--    <bean id="flightDtoService" class="com.myproject.FlightDtoServiceImpl">-->
+<!--        <constructor-arg ref="flightDtoDao"/>-->
+<!--    </bean>-->
+
+<!--    <bean id="flightDtoDao" class="com.myproject.jdbc.FlightDtoDaoJdbc">-->
+<!--        <constructor-arg ref="namedParameterJdbcTemplate"/>-->
+<!--    </bean>-->
+
+<!--    <bean id="namedParameterJdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">-->
+<!--        <constructor-arg name="dataSource" ref="dataSource"/>-->
+<!--    </bean>-->
 
     <!-- Thymeleaf Template Resolver -->
     <bean id="templateResolver"

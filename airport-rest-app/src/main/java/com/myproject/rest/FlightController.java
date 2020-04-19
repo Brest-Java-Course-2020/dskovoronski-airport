@@ -13,7 +13,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Optional;
 
-import static com.myproject.constants.restConstants.*;
+import static com.myproject.constants.RestConstants.*;
 
 /**
  * Flight rest Controller

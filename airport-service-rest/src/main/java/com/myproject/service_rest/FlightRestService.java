@@ -2,7 +2,6 @@ package com.myproject.service_rest;
 
 import com.myproject.FlightService;
 import com.myproject.model.Flight;
-import com.myproject.model.Passenger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.*;
@@ -41,10 +40,9 @@ public class FlightRestService implements FlightService {
     }
 
     @Override
-    public Integer create(Flight flight) {
+    public int update(Flight flight) {
         LOGGER.debug("update({})", flight);
         // restTemplate.put(url, department); if method would be void
-
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
         HttpEntity<Flight> entity = new HttpEntity<>(flight, headers);
@@ -53,9 +51,9 @@ public class FlightRestService implements FlightService {
     }
 
     @Override
-    public int update(Flight flight) {
-        LOGGER.debug("create({})", flight);
-        ResponseEntity responseEntity = restTemplate.postForEntity(url, flight,Integer.class);
+    public Integer create(Flight flight) {
+        LOGGER.debug("create ({})", flight);
+        ResponseEntity responseEntity = restTemplate.postForEntity(url, flight, Integer.class);
         return (Integer) responseEntity.getBody();
     }
 
@@ -66,7 +64,7 @@ public class FlightRestService implements FlightService {
         headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
         HttpEntity<Flight> entity = new HttpEntity<>(headers);
         ResponseEntity<Integer> result =
-                restTemplate.exchange(url + flightId, HttpMethod.DELETE, entity, Integer.class);
+                restTemplate.exchange(url + "/delete/"+ flightId, HttpMethod.DELETE, entity, Integer.class);
         return result.getBody();
     }
 }

@@ -1,6 +1,6 @@
 package com.myproject.constants;
 
-public class restConstants {
+public class RestConstants {
     public static final String FLIGHT_NOT_FOUND = "flight not found";
     public static final String FLIGHT_NOT_FOUND_BY_ID = "flight not found by id: ";
 

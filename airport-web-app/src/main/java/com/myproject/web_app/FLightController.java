@@ -12,10 +12,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.time.LocalDate;
@@ -27,6 +24,7 @@ import java.util.Optional;
  * Flight controller.
  */
 @Controller
+@RequestMapping("/flights")
 public class FLightController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(FLightController.class);
@@ -49,15 +47,18 @@ public class FLightController {
      *
      * @return view name
      */
-    @GetMapping(value = "/flights")
-    public final String flights(@RequestParam (value = "dateFrom", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateFrom,
-                                @RequestParam (value = "dateTo", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateTo,
+    @GetMapping
+    public final String flights(@RequestParam (value = "dateFrom", required = false)
+                                @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateFrom,
+                                @RequestParam (value = "dateTo", required = false)
+                                @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateTo,
                                 Model model){
 
         if (dateFrom!= null && dateTo != null){
 
             LOGGER.debug("Find flights between dates. dateFrom = {}, dateTo = {}", dateFrom, dateTo);
-            model.addAttribute("flights", flightDtoService.findAllWithQuantityPassengersAndDateFilter(dateFrom, dateTo));
+            List<FlightDto> flightsDtoList= flightDtoService.findAllWithQuantityPassengersAndDateFilter(dateFrom, dateTo);
+            model.addAttribute("flights", flightsDtoList);
         }
         else{
 
@@ -74,11 +75,11 @@ public class FLightController {
      *
      * @return view name
      */
-    @GetMapping(value = "/flight/{id}")
-    public final String gotoEditFlightPage(@PathVariable Integer id, Model model) {
+    @GetMapping(value = "/{flightId}")
+    public final String gotoEditFlightPage(@PathVariable Integer flightId, Model model) {
 
-        LOGGER.debug("gotoEditFlightPage({},{})", id, model);
-        Optional<Flight> optionalFlight = flightService.findById(id);
+        LOGGER.debug("gotoEditFlightPage({},{})", flightId, model);
+        Optional<Flight> optionalFlight = flightService.findById(flightId);
         if (optionalFlight.isPresent()) {
             model.addAttribute("isNew", false);
             model.addAttribute("flight", optionalFlight.get());
@@ -95,9 +96,9 @@ public class FLightController {
      * @param result binding result
      * @return view name
      */
-    @PostMapping(value = "/flight/{id}")
+    @PostMapping(value = "/{id}")
     public String updateFlight(@Valid Flight flight,
-                                   BindingResult result) {
+                               BindingResult result) {
 
         LOGGER.debug("updateFlight({}, {})", flight, result);
         flightValidator.validate(flight, result);
@@ -110,11 +111,11 @@ public class FLightController {
     }
 
     /**
-     * Goto flight page.
+     * Goto new flight page.
      *
      * @return view name
      */
-    @GetMapping(value = "/flight")
+    @GetMapping(value = "/add")
     public final String gotoAddFlightPage(Model model) {
         LOGGER.debug("gotoAddFlightPage({})", model);
         model.addAttribute("isNew", true);
@@ -129,9 +130,9 @@ public class FLightController {
      * @param result binding result.
      * @return view name
      */
-    @PostMapping(value = "/flight")
+    @PostMapping(value = "/add")
     public String addFlight(@Valid Flight flight,
-                                BindingResult result) {
+                            BindingResult result) {
 
         LOGGER.debug("addFlight({}, {})", flight, result);
         flightValidator.validate(flight, result);
@@ -149,11 +150,13 @@ public class FLightController {
      *
      * @return view name
      */
-    @GetMapping(value = "/flight/{flightId}/delete")
+    @GetMapping(value = "/{flightId}/delete")
     public final String deleteFlightById(@PathVariable Integer flightId, Model model) {
 
         LOGGER.debug("delete({},{})", flightId, model);
+
         flightService.delete(flightId);
+
 
         return "redirect:/flights";
     }
