@@ -1,7 +1,6 @@
 package com.myproject.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
@@ -9,8 +8,7 @@ import java.time.LocalDate;
 /**
  * POJO Flight for model.
  */
-@SuppressFBWarnings(value = { "EI_EXPOSE_REP", "EI_EXPOSE_REP2" }
-        , justification = "I prefer to suppress these FindBugs warnings")
+
 public class Flight {
 
     /**

@@ -18,7 +18,7 @@
     <mvc:resources mapping="/resources/**" location="/resources/"/>
 
     <!-- Component scan for @Controller, @Service... annotations -->
-    <context:component-scan base-package="com.myproject.*"/>
+    <context:component-scan base-package="com.myproject.web_app"/>
 
 <!--    <import resource="classpath*:test-db.xml"/>-->
 
@@ -31,27 +31,27 @@
         </property>
     </bean>
 
-    <bean id="flightsController" class="com.myproject.web_app.FLightController">
-        <constructor-arg index="0" ref="flightsRestService"/>
-        <constructor-arg index="0" ref="flightsDtoRestService"/>
+    <bean id="flightController" class="com.myproject.web_app.FLightController">
+        <constructor-arg index="0" ref="flightRestService"/>
+        <constructor-arg index="1" ref="flightDtoRestService"/>
     </bean>
 
-    <bean id="passengersController" class="com.myproject.web_app.PassengerController">
-        <constructor-arg index="0" ref="passengersRestService"/>
-        <constructor-arg index="1" ref="flightsRestService "/>
+    <bean id="passengerController" class="com.myproject.web_app.PassengerController">
+        <constructor-arg index="0" ref="passengerRestService"/>
+        <constructor-arg index="1" ref="flightRestService "/>
     </bean>
 
-    <bean id="flightsDtoRestService" class="com.myproject.service_rest.FlightDtoRestService">
+    <bean id="flightDtoRestService" class="com.myproject.service_rest.FlightDtoRestService">
         <constructor-arg index="0" value="${protocol}://${host}:${port}/${point.flightsDto}"/>
         <constructor-arg index="1" ref="restTemplate"/>
     </bean>
 
-    <bean id="flightsRestService" class="com.myproject.service_rest.FlightRestService">
+    <bean id="flightRestService" class="com.myproject.service_rest.FlightRestService">
         <constructor-arg index="0" value="${protocol}://${host}:${port}/${point.flights}"/>
         <constructor-arg index="1" ref="restTemplate"/>
     </bean>
 
-    <bean id="passengersRestService" class="com.myproject.service_rest.PassengerRestService">
+    <bean id="passengerRestService" class="com.myproject.service_rest.PassengerRestService">
         <constructor-arg index="0" value="${protocol}://${host}:${port}/${point.passengers}"/>
         <constructor-arg index="1" ref="restTemplate"/>
     </bean>

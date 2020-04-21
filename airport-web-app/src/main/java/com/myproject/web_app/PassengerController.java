@@ -3,7 +3,6 @@ package com.myproject.web_app;
 import com.myproject.FlightService;
 import com.myproject.PassengerService;
 import com.myproject.model.Passenger;
-import com.myproject.web_app.validators.FlightValidator;
 import com.myproject.web_app.validators.PassengerValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

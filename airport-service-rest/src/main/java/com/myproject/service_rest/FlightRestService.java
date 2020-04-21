@@ -40,6 +40,14 @@ public class FlightRestService implements FlightService {
     }
 
     @Override
+    public Integer create(Flight flight) {
+        LOGGER.debug("create ({})", flight);
+        ResponseEntity responseEntity = restTemplate.postForEntity(url, flight, Integer.class);
+        return (Integer) responseEntity.getBody();
+    }
+
+    @Override
+
     public int update(Flight flight) {
         LOGGER.debug("update({})", flight);
         // restTemplate.put(url, department); if method would be void
@@ -50,12 +58,6 @@ public class FlightRestService implements FlightService {
         return result.getBody();
     }
 
-    @Override
-    public Integer create(Flight flight) {
-        LOGGER.debug("create ({})", flight);
-        ResponseEntity responseEntity = restTemplate.postForEntity(url, flight, Integer.class);
-        return (Integer) responseEntity.getBody();
-    }
 
     @Override
     public int delete(Integer flightId) {

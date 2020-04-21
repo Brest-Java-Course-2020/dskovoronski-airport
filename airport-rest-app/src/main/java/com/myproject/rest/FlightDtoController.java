@@ -54,4 +54,5 @@ public class FlightDtoController {
         LOGGER.debug("flights find all with quantity passengers()");
         return flightDtoService.findAllWithQuantityPassengers();
     }
+
 }

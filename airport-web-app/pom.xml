@@ -27,6 +27,7 @@
         <dependency>
             <groupId>com.myproject</groupId>
             <artifactId>airport-dao</artifactId>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>com.myproject</groupId>
@@ -35,6 +36,7 @@
         <dependency>
             <groupId>com.myproject</groupId>
             <artifactId>airport-service</artifactId>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>com.myproject</groupId>
