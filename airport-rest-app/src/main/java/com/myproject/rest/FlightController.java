@@ -2,23 +2,20 @@ package com.myproject.rest;
 
 import com.myproject.FlightService;
 import com.myproject.model.Flight;
-import com.myproject.rest.exceptions.ErrorResponse;
+import com.myproject.rest.exceptions.FlightNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
 import java.util.Collection;
-import java.util.Optional;
-
-import static com.myproject.constants.RestConstants.*;
 
 /**
  * Flight rest Controller
  */
 @RestController
+@RequestMapping("/flights")
 public class FlightController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(FlightController.class);
@@ -27,36 +24,31 @@ public class FlightController {
 
     public FlightController(FlightService flightService) {
         this.flightService = flightService;
+        LOGGER.debug("create rest app Flight controller");
     }
+
 
     /**
      * Go to flights list page
      *
      * @return view name
      */
-    @GetMapping(value = "/flights")
+    @GetMapping
     public final Collection<Flight> flights(){
         LOGGER.debug("flights()");
         return flightService.findAll();
     }
 
     /**
-     * find flight by id
-     * @param id
+     * find flight by flightId
+     * @param flightId
      * @return flight
      */
-    @GetMapping(value = "/flights/{id}")
-     public ResponseEntity<Flight> findById(@PathVariable Integer id){
-            LOGGER.debug("find flight by id({})", id);
+    @GetMapping(value = "/{id}")
+     public Flight findById(@PathVariable Integer flightId){
+            LOGGER.debug("find flight by id({})", flightId);
 
-            Optional<Flight> optional = flightService.findById(id);
-            return optional.isPresent()
-                    ? new ResponseEntity<>(optional.get(), HttpStatus.OK)
-                    : new ResponseEntity(
-                    new ErrorResponse(FLIGHT_NOT_FOUND,
-                            Arrays.asList(FLIGHT_NOT_FOUND_BY_ID + id)),
-                    HttpStatus.NOT_FOUND);
-            //return flightService.findById(id).orElseThrow(()->new FlightNotFoundException(id)); // more easy
+           return flightService.findById(flightId).orElseThrow(() -> new FlightNotFoundException(flightId));
     }
 
     /**
@@ -64,12 +56,12 @@ public class FlightController {
      * @param flight
      * @return id flight
      */
-    @PostMapping(path = "/flights", consumes = "application/json", produces = "application/json")
+    @PostMapping(consumes = "application/json", produces = "application/json")
     public ResponseEntity<Integer> createFlight(@RequestBody Flight flight) {
 
         LOGGER.debug("createFlight({})", flight);
         Integer id = flightService.create(flight);
-        return new ResponseEntity<>(id, HttpStatus.OK); //???????????
+        return new ResponseEntity<>(id, HttpStatus.OK);
     }
 
     /**
@@ -77,24 +69,24 @@ public class FlightController {
      * @param flight
      * @return id flight
      */
-    @PutMapping(value = "/flights", consumes = {"application/json"}, produces = {"application/json"})
+    @PutMapping(consumes = {"application/json"}, produces = {"application/json"})
     public ResponseEntity<Integer> updateFlight(@RequestBody Flight flight) {
 
         LOGGER.debug("updateFlight({})", flight);
-        int result = flightService.update(flight);
+        Integer result = flightService.update(flight);
         return new ResponseEntity(result, HttpStatus.OK);
 
     }
 
     /**
      * delete flight
-     * @param id
+     * @param flightsId
      * @return result of delete
      */
-    @DeleteMapping(value = "/flights/{id}", produces = {"application/json"})
-    public ResponseEntity<Integer> deleteFlight(@PathVariable Integer id) {
+    @DeleteMapping(value = "/{id}", produces = {"application/json"})
+    public ResponseEntity<Integer> deleteFlight(@PathVariable Integer flightsId) {
 
-        int result = flightService.delete(id);
+        Integer result = flightService.delete(flightsId);
         return new ResponseEntity(result, HttpStatus.OK);
     }
 }

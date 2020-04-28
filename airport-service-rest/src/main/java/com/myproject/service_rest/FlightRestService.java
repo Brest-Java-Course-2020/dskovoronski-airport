@@ -22,6 +22,7 @@ public class FlightRestService implements FlightService {
     public FlightRestService(String url, RestTemplate restTemplate) {
         this.url = url;
         this.restTemplate = restTemplate;
+        LOGGER.debug("create Flight Rest SERVICE");
     }
 
     @Override
@@ -40,6 +41,14 @@ public class FlightRestService implements FlightService {
     }
 
     @Override
+    public Integer create(Flight flight) {
+        LOGGER.debug("create ({})", flight);
+        ResponseEntity responseEntity = restTemplate.postForEntity(url, flight, Integer.class);
+        return (Integer) responseEntity.getBody();
+    }
+
+    @Override
+
     public int update(Flight flight) {
         LOGGER.debug("update({})", flight);
         // restTemplate.put(url, department); if method would be void
@@ -50,12 +59,6 @@ public class FlightRestService implements FlightService {
         return result.getBody();
     }
 
-    @Override
-    public Integer create(Flight flight) {
-        LOGGER.debug("create ({})", flight);
-        ResponseEntity responseEntity = restTemplate.postForEntity(url, flight, Integer.class);
-        return (Integer) responseEntity.getBody();
-    }
 
     @Override
     public int delete(Integer flightId) {
@@ -64,7 +67,7 @@ public class FlightRestService implements FlightService {
         headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
         HttpEntity<Flight> entity = new HttpEntity<>(headers);
         ResponseEntity<Integer> result =
-                restTemplate.exchange(url + "/delete/"+ flightId, HttpMethod.DELETE, entity, Integer.class);
+                restTemplate.exchange(url + "/"+ flightId, HttpMethod.DELETE, entity, Integer.class);
         return result.getBody();
     }
 }

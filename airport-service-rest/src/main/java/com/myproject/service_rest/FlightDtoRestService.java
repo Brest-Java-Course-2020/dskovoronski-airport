@@ -23,6 +23,7 @@ public class FlightDtoRestService implements FlightDtoService {
     public FlightDtoRestService(String url, RestTemplate restTemplate) {
         this.url = url;
         this.restTemplate = restTemplate;
+        LOGGER.debug("create Flight Dto Rest SERVICE");
     }
 
     @Override

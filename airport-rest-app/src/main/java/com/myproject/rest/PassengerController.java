@@ -13,7 +13,8 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Optional;
 
-import static com.myproject.constants.RestConstants.*;
+import static com.myproject.constants.RestConstants.PASSENGER_NOT_FOUND;
+import static com.myproject.constants.RestConstants.PASSENGER_NOT_FOUND_BY_ID;
 
 /**
  * Passenger Rest Controller
@@ -27,6 +28,7 @@ public class PassengerController {
 
    public PassengerController(PassengerService passengerService) {
         this.passengerService = passengerService;
+       LOGGER.debug("create rest app Passenger controller");
     }
 
 
@@ -38,6 +40,7 @@ public class PassengerController {
     @GetMapping(value = "/passengers")
     public final Collection<Passenger> passengers(){
         LOGGER.debug("passengers()");
+
         return passengerService.findAll();
     }
 

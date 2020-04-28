@@ -29,17 +29,16 @@ public class FLightController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(FLightController.class);
 
-    private final FlightService flightService;
+    @Autowired
+    private FlightService flightService;
 
-    private final FlightDtoService flightDtoService;
+    @Autowired
+    private FlightDtoService flightDtoService;
 
     @Autowired
     FlightValidator flightValidator;
 
-    public FLightController(FlightService flightService, FlightDtoService flightDtoService) {
-        this.flightService = flightService;
-        this.flightDtoService = flightDtoService;
-    }
+
 
 
     /**

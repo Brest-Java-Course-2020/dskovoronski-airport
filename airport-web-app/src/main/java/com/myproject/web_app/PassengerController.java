@@ -3,7 +3,6 @@ package com.myproject.web_app;
 import com.myproject.FlightService;
 import com.myproject.PassengerService;
 import com.myproject.model.Passenger;
-import com.myproject.web_app.validators.FlightValidator;
 import com.myproject.web_app.validators.PassengerValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,17 +25,16 @@ public class PassengerController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PassengerController.class);
 
-    private final PassengerService passengerService;
+    @Autowired
+    private PassengerService passengerService;
 
-    private  final FlightService flightService;
+    @Autowired
+    private FlightService flightService;
 
     @Autowired
     PassengerValidator passengerValidator;
 
-    public PassengerController(PassengerService passengerService, FlightService flightService) {
-        this.passengerService = passengerService;
-        this.flightService = flightService;
-    }
+
 
     /**
      * Goto passengers page.

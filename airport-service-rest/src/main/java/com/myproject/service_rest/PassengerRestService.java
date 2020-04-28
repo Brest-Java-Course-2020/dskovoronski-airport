@@ -22,6 +22,7 @@ public class PassengerRestService implements PassengerService {
     public PassengerRestService(String url, RestTemplate restTemplate) {
         this.url = url;
         this.restTemplate = restTemplate;
+        LOGGER.debug("create Passenger Rest SERVICE");
     }
 
 

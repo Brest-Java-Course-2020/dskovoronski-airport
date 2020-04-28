@@ -26,6 +26,7 @@ public class FlightDtoController {
 
     public FlightDtoController(FlightDtoService flightDtoService) {
         this.flightDtoService = flightDtoService;
+        LOGGER.debug("create rest app Flight DTO controller");
     }
 
 
@@ -54,4 +55,5 @@ public class FlightDtoController {
         LOGGER.debug("flights find all with quantity passengers()");
         return flightDtoService.findAllWithQuantityPassengers();
     }
+
 }

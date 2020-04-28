@@ -76,7 +76,9 @@ public class FlightDtoRestServiceIT {
 
         LOGGER.debug("should find all with quantity passengers()");
         //given
+
         mockServer.expect(ExpectedCount.once(), requestTo(new URI(FLIGHTS_DTO_URL + "/quantity")))
+
                 .andExpect(method(HttpMethod.GET))
                 .andRespond(withStatus(HttpStatus.OK)
                         .contentType(MediaType.APPLICATION_JSON)
