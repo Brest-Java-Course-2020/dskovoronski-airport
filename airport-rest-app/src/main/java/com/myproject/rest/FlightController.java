@@ -24,7 +24,6 @@ public class FlightController {
 
     public FlightController(FlightService flightService) {
         this.flightService = flightService;
-        LOGGER.debug("create rest app Flight controller");
     }
 
 
@@ -44,7 +43,7 @@ public class FlightController {
      * @param flightId
      * @return flight
      */
-    @GetMapping(value = "/{id}")
+    @GetMapping(value = "/{flightId}")
      public Flight findById(@PathVariable Integer flightId){
             LOGGER.debug("find flight by id({})", flightId);
 
@@ -57,11 +56,10 @@ public class FlightController {
      * @return id flight
      */
     @PostMapping(consumes = "application/json", produces = "application/json")
-    public ResponseEntity<Integer> createFlight(@RequestBody Flight flight) {
+    public Integer createFlight(@RequestBody Flight flight) {
 
         LOGGER.debug("createFlight({})", flight);
-        Integer id = flightService.create(flight);
-        return new ResponseEntity<>(id, HttpStatus.OK);
+        return  flightService.create(flight);
     }
 
     /**
@@ -73,7 +71,7 @@ public class FlightController {
     public ResponseEntity<Integer> updateFlight(@RequestBody Flight flight) {
 
         LOGGER.debug("updateFlight({})", flight);
-        Integer result = flightService.update(flight);
+        int result = flightService.update(flight);
         return new ResponseEntity(result, HttpStatus.OK);
 
     }
@@ -83,10 +81,13 @@ public class FlightController {
      * @param flightsId
      * @return result of delete
      */
-    @DeleteMapping(value = "/{id}", produces = {"application/json"})
+    @DeleteMapping(value = "/{flightsId}",produces = {"application/json"})
     public ResponseEntity<Integer> deleteFlight(@PathVariable Integer flightsId) {
 
-        Integer result = flightService.delete(flightsId);
-        return new ResponseEntity(result, HttpStatus.OK);
+        LOGGER.debug("delete()");
+        int result = flightService.delete(flightsId);
+        return  new ResponseEntity(result, HttpStatus.OK);
+
     }
+
 }

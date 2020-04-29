@@ -22,7 +22,6 @@ public class FlightRestService implements FlightService {
     public FlightRestService(String url, RestTemplate restTemplate) {
         this.url = url;
         this.restTemplate = restTemplate;
-        LOGGER.debug("create Flight Rest SERVICE");
     }
 
     @Override
@@ -67,7 +66,8 @@ public class FlightRestService implements FlightService {
         headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
         HttpEntity<Flight> entity = new HttpEntity<>(headers);
         ResponseEntity<Integer> result =
-                restTemplate.exchange(url + "/"+ flightId, HttpMethod.DELETE, entity, Integer.class);
+                restTemplate.exchange(url+"/"+flightId, HttpMethod.DELETE, entity, Integer.class);
         return result.getBody();
     }
+
 }

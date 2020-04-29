@@ -12,6 +12,4 @@ CREATE TABLE passengers (
   lastname VARCHAR(30) NOT NULL,
   flight_id INTEGER NOT NULL,
   PRIMARY KEY (passenger_id),
- 	FOREIGN KEY (flight_id)
-	REFERENCES flights (flight_id)
-);
+ 	FOREIGN KEY (flight_id) REFERENCES flights (flight_id) ON DELETE CASCADE);

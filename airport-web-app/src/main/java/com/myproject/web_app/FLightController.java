@@ -96,9 +96,10 @@ public class FLightController {
      * @return view name
      */
     @PostMapping(value = "/{id}")
-    public String updateFlight(@Valid Flight flight,
-                               BindingResult result) {
+    public String updateFlight(@ModelAttribute("flight")@Valid Flight flight,
+                               BindingResult result, Model model) {
 
+        model.addAttribute("flightEntity", flight);
         LOGGER.debug("updateFlight({}, {})", flight, result);
         flightValidator.validate(flight, result);
         if (result.hasErrors()) {
@@ -117,7 +118,6 @@ public class FLightController {
     @GetMapping(value = "/add")
     public final String gotoAddFlightPage(Model model) {
         LOGGER.debug("gotoAddFlightPage({})", model);
-        model.addAttribute("isNew", true);
         model.addAttribute("flight", new Flight());
         return "flight";
     }
@@ -156,7 +156,7 @@ public class FLightController {
 
         flightService.delete(flightId);
 
-
         return "redirect:/flights";
     }
+
 }
