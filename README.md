@@ -89,7 +89,7 @@ curl --location --request PUT 'http://localhost:8081/passengers/2' \
 --data-raw '{"firstName":"Dmitry","lastName":"Skovoronski","flightId":"105"}'
 ```
 
-###delete
+### delete
 
 ```
 curl --location --request DELETE 'http://localhost:8081/passengers/2'
