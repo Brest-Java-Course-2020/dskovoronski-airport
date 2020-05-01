@@ -13,6 +13,8 @@
 
     <packaging>war</packaging>
 
+    <description>Module include Controllers, created to receive database information from services, for processing other sources</description>
+
 <dependencies>
 
     <dependency>
