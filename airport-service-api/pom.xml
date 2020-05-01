@@ -16,6 +16,8 @@
 
     <packaging>jar</packaging>
 
+    <description>this module is designed to interact with databases and other sources of information or resources</description>
+
     <dependencies>
         <dependency>
             <groupId>com.myproject</groupId>

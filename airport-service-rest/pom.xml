@@ -13,6 +13,8 @@
 
     <packaging>jar</packaging>
 
+    <description>This module includes Rest-Services, working through ResponseEntity and url</description>
+
     <dependencies>
 
          <dependency>

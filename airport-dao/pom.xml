@@ -11,6 +11,8 @@
 
     <artifactId>airport-dao</artifactId>
 
+    <description>This module is designed to connect to the database.</description>
+
     <dependencies>
         <dependency>
             <groupId>com.myproject</groupId>

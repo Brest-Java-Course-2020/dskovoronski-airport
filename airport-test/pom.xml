@@ -10,6 +10,8 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
+    <description>this module is designed to emulate the database</description>
+
     <artifactId>airport-test</artifactId>
 
     <dependencies>

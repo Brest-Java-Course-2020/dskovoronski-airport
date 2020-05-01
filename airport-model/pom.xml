@@ -11,6 +11,8 @@
 
     <artifactId>airport-model</artifactId>
 
+    <description>This module include models (POJO files)</description>
+
 <dependencies>
 
     <dependency>

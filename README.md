@@ -2,12 +2,12 @@
 # dskovoronski-airport
 
 ## How build
-Setup java 8 and Maven, see [setup_JDK8_maven.md](README/setup_JDK8_maven.md "click") 
+Setup java 8 and Maven, see [setup_JDK8_maven.md](documentation/setup_JDK8_maven.md "click") 
   
       
 ## Build project 
-1. Setup application using jetty server [using_jetty.md](README/using_jetty.md "click")
-2. Setup application using jetty plugin  [using_jetty_plugin.md](README/using_jetty_plugin.md "click")
+1. Setup application using jetty server [using_jetty.md](documentation/using_jetty.md "click")
+2. Setup application using jetty plugin  [using_jetty_plugin.md](documentation/using_jetty_plugin.md "click")
 
 
 ## FLights

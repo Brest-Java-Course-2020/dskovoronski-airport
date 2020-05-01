@@ -13,6 +13,8 @@
 
     <name>Service implementation</name>
 
+    <description>this module include implements service-api, which specifically describes the interaction with the module DAO</description>
+
     <packaging>jar</packaging>
 
     <dependencies>
